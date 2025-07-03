@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Docx Summarizer & Quick Points</title>
+    <link rel="stylesheet" href="styleee.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/mammoth/mammoth.browser.min.js"></script> 
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 AI Document Analyzer</h1>
+
+    <input type="file" id="docxInput" accept=".docx" />
+    <textarea id="inputText" placeholder="Or paste your text here..." rows="15"></textarea>
+
+    <div class="button-group">
+        <button onclick="summarizeText('summary')">Generate Summary</button>
+        <button onclick="summarizeText('points')">Generate Quick Points</button>
+    </div>
+
+    <h2>📝 Result:</h2>
+    <div id="resultArea"></div>
+  
+
+<div class="save-group" style="text-align: center; margin-top: 20px;">
+    <button id="saveBtn" onclick="saveResult()" style="display: none;">💾 Save Result</button>
+</div>
+
+</div>
+
+<script src="app1.js"></script>
+</body>
+</html>

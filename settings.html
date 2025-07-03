@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Planner - Settings</title>
+  <link rel="stylesheet" href="settings.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  height: 100vh;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.settings-container {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar */
+.settings-sidebar {
+  width: 260px;
+  background: #c3abf0; /* changed from gradient to solid purple */
+  color: #090808;
+  padding: 30px 20px;
+  box-shadow: 5px 0 20px rgba(110, 86, 255, 0.15);
+}
+
+
+.settings-sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+}
+
+.settings-sidebar li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.settings-sidebar li i {
+  margin-right: 10px;
+}
+
+.settings-sidebar li:hover {
+  background-color: #b89fef;
+}
+
+/* Main Content */
+.settings-main {
+  flex: 1;
+  padding: 40px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.setting-panel {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.setting-panel.active {
+  display: block;
+}
+
+.setting-panel h3 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.setting-panel label {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.setting-panel input[type="checkbox"],
+.setting-panel input[type="email"],
+.setting-panel input[type="color"],
+.setting-panel select {
+  margin-left: 10px;
+  padding: 6px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.setting-panel button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #5a24b8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.setting-panel button:hover {
+  background-color: #5a24b8;
+}
+
+/* Scrollbar Styling */
+.settings-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.settings-main::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+#default {
+  background: #f0f8ff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+#default h3 {
+  color: #2c3e50;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#default p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+#default ul.welcome-features {
+  padding-left: 20px;
+}
+
+#default ul.welcome-features li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-left: 4px solid #5a24b8;
+  background-color: #eafaf1;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+#default ul.welcome-features li:hover {
+  background-color: #d9f5e4;
+}
+.settings-sidebar li.selected {
+  background-color: #5a24b8;
+  color: #fff;
+  font-weight: bold;
+}
+.back-btn {
+  background-color: #5a24b8; /* darker purple for contrast */
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #3e1890; /* even darker purple on hover */
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="settings-container">
+    <aside class="settings-sidebar">
+      <h2>Settings</h2>
+      <ul>
+  <li id="tab-general" onclick="showPanel('general', this)"><i class="fas fa-cogs"></i> General</li>
+  <li id="tab-account" onclick="showPanel('account', this)"><i class="fas fa-user-circle"></i> Account</li>
+  <li id="tab-notifications" onclick="showPanel('notifications', this)"><i class="fas fa-bell"></i> Notifications</li>
+  <li id="tab-appearance" onclick="showPanel('appearance', this)"><i class="fas fa-paint-brush"></i> Appearance</li>
+  <li id="tab-privacy" onclick="showPanel('privacy', this)"><i class="fas fa-lock"></i> Privacy</li>
+  <li id="tab-help" onclick="showPanel('help', this)"><i class="fas fa-info-circle"></i> Help & About</li>
+</ul>
+
+    </aside>
+
+    <main class="settings-main">
+        <div id="default" class="setting-panel active">
+        
+        <p>This AI-powered Study Planner helps you manage your time, track your progress, and access the best learning resources.</p>
+        <ul>
+          <li>📅 Organize your study schedule with the timetable feature</li>
+          <li>📊 Analyze your learning with performance graphs</li>
+          <li>📚 Explore AI-recommended learning resources</li>
+          <li>🎯 Customize your experience with personal settings</li>
+        </ul>
+      </div>
+
+      <!-- General Settings -->
+      <section id="general" class="setting-panel ">
+      
+        <h3>General Settings</h3>
+        <label><input type="checkbox"> Enable Study Mode</label>
+        <label><input type="checkbox"> Remind Me Daily</label>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+
+      <!-- Account Settings -->
+      <section id="account" class="setting-panel">
+        <h3>Account Settings</h3>
+        <label>Email: <input type="email" value="student@example.com" /></label>
+        <button>Update Email</button>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+
+      <!-- Notification Settings -->
+      <section id="notifications" class="setting-panel">
+        <h3>Notification Settings</h3>
+        <label><input type="checkbox"> Task Reminders</label>
+        <label><input type="checkbox"> Weekly Progress Reports</label>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+
+      <!-- Appearance Settings -->
+      <section id="appearance" class="setting-panel">
+        <h3>Appearance Settings</h3>
+        <label>Theme: 
+          <select>
+            <option>Light</option>
+            <option>Dark</option>
+            <option>Auto</option>
+          </select>
+        </label>
+        <label>Accent Color:
+          <input type="color" value="#4CAF50" />
+        </label>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+
+      <!-- Privacy Settings -->
+      <section id="privacy" class="setting-panel">
+        <h3>Privacy Settings</h3>
+        <label><input type="checkbox"> Allow Location Access</label>
+        <label><input type="checkbox"> Allow Data Sync</label>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+
+      <!-- Help & About -->
+      <section id="help" class="setting-panel">
+        <h3>Help & About</h3>
+        <p>Version: 1.0.0</p>
+        <p>Need help? Contact support@studyplanner.com</p>
+        <button class="back-btn" onclick="showPanel('default')"><i class="fas fa-arrow-left"></i> Back</button>
+      </section>
+    </main>
+  </div>
+
+  <script>
+   function showPanel(id, element = null) {
+    // Hide all panels
+    const panels = document.querySelectorAll('.setting-panel');
+    panels.forEach(panel => panel.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    // Remove 'selected' class from all tabs
+    const tabs = document.querySelectorAll('.settings-sidebar li');
+    tabs.forEach(tab => tab.classList.remove('selected'));
+
+    // Add 'selected' class to the clicked tab
+    if (element) {
+      element.classList.add('selected');
+    }
+  }
+
+  // Show only default panel on load
+  window.onload = function () {
+    showPanel('default');
+  };
+  </script>
+</body>
+</html>

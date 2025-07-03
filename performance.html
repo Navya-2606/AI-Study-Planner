@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Study Progress Performance</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="performance.css" />
+</head>
+<body>
+  <header>
+    <h1>📊 Study Progress Performance</h1>
+  </header>
+
+  <section id="summaryBox" class="summary-box">
+    Loading progress...
+  </section>
+
+  <section class="progress-sections">
+  <div class="progress-block" id="dailySection">
+    <h3>Daily Progress</h3>
+    <div class="progress-content">
+      <ul id="dailyList"></ul>
+      <canvas id="dailyChart"></canvas>
+    </div>
+  </div>
+
+  <div class="progress-block" id="weeklySection">
+    <h3>Weekly Progress</h3>
+    <div class="progress-content">
+      <ul id="weeklyList"></ul>
+      <canvas id="weeklyChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- Pie chart somewhere visible, e.g. -->
+<section class="completion-section">
+  <h3>Overall Completion</h3>
+  <canvas id="completionPie"></canvas>
+</section>
+<section class="badges-section">
+  <h3>🎖️ Badges & Achievements</h3>
+  <div id="badgesContainer" class="badges-container">
+    <!-- Badges will be injected by JavaScript -->
+  </div>
+</section>
+<section class="feedback-section">
+  <h3>🧠 Personalized Feedback</h3>
+  <p id="feedbackMessage">Loading feedback...</p>
+</section>
+
+
+
+  <script src="performance.js"></script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Resources</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    * {
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #f3e7ff, #e5f0ff); /* Lighter purple gradient */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: white; /* Purple */
+  padding: 20px;
+  color:  #7c3aed;
+  overflow-y: auto;
+}
+
+.sidebar h1 {
+  font-size: 22px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.resource-welcome {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background:  linear-gradient(to right, #ac70b5, #e5f0ff);
+  /* Purple gradient */
+   color: var(--text);
+  
+
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.resource-welcome h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.resource-welcome p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.topic {
+  padding: 12px 15px;
+  background-color: white; /* Purple */
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topic:hover {
+  background-color:  #a077e7; /* Lighter purple */
+}
+
+.main {
+  flex-grow: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.resources {
+  display: none;
+}
+
+.resources.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.resources h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color:  #7c3aed;; /* Purple */
+}
+
+.subtopics {
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.subtopic {
+  background: #8f68d3; /* Lighter purple */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.subtopic:hover {
+  background-color:#a077e7; /* Purple */
+}
+
+.resource-link {
+  display: block;
+  background: #fff;
+  padding: 12px 18px;
+  margin: 10px 0;
+  border-left: 5px solid #9b4dca; /* Purple border */
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+}
+
+.resource-link:hover {
+  background: #f3e7ff; /* Lighter purple background */
+}
+
+button[onclick="goBack()"] {
+  background-color: #7c3aed; /* Lighter purple */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+button[onclick="goBack()"]:hover {
+  background-color: #9b4dca; /* Purple */
+}
+
+.coding-resources h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #9b4dca; /* Purple */
+}
+
+.dark-mode .coding-resources h3 {
+  color: #f1f1f1;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color:  #7c3aed;; /* Purple */
+}
+
+#language-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#language-buttons button {
+  background-color: #7c3aed; /* Lighter purple */
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#language-buttons button:hover {
+  background-color: #9b4dca; /* Purple */
+}
+
+#language-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+#language-content h3 {
+  margin-bottom: 10px;
+  color: #9b4dca; /* Purple */
+}
+
+#language-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#language-content ul li {
+  margin-bottom: 10px;
+}
+
+#language-content ul li a {
+  color: #9b4dca; /* Purple links */
+  text-decoration: none;
+}
+
+#language-content ul li a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dark-mode .resource-link {
+  background: #4527a0;
+  color: #eee;
+  border-left: 5px solid #ba68c8;
+}
+
+.dark-mode #language-content {
+  background: #311b92;
+  color: #eee;
+}
+
+.dark-mode #language-content ul li a {
+  color: #ba68c8;
+}
+
+.dark-mode #language-buttons button {
+  background-color: #512da8;
+}
+
+.dark-mode #language-buttons button:hover {
+  background-color: #673ab7;
+}
+
+.dark-mode .subtopic {
+  background: #512da8;
+}
+
+.dark-mode .subtopic:hover {
+  background: #673ab7;
+}
+
+.toggle-mode {
+  margin-top: 30px;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  background: #7c3aed; /* Lighter purple */
+  color: white;
+  border-radius: 8px;
+}
+/* Base page background and text color */
+.dark-mode body {
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+}
+
+/* Main containers */
+.dark-mode .container,
+.dark-mode .sidebar,
+.dark-mode .resources,
+.dark-mode .coding-resources,
+.dark-mode .maths-resources {
+  background-color: #2c2c3a;
+  color: #f0f0f0;
+}
+
+/* Ensure buttons and inputs also have dark styles */
+.dark-mode button,
+.dark-mode input,
+.dark-mode select {
+  background-color: #3b3b4f;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>Welcome to Resources</h1>
+    <div class="topic" onclick="showResources('coding')">💻 Coding</div>
+    <div class="topic" onclick="showResources('maths')">📐 Maths</div>
+    <div class="topic" onclick="showResources('science')">🔬 Science</div>
+    <div class="topic" onclick="showResources('social')">🌍 Social</div>
+    <div class="topic" onclick="showResources('cp')">🗄 CP</div>
+    <div class="topic" onclick="showResources('os')">🧠 OS</div>
+    <div class="topic" onclick="showResources('cn')">🌐 CN</div>
+    <div class="topic" onclick="showResources('languages')">🗣 Languages</div>
+    <div class="topic" onclick="showResources('physics')">⚛ Physics</div>
+    <div class="topic" onclick="showResources('chemistry')">🧪 Chemistry</div>
+    <div class="toggle-mode" onclick="toggleMode()">🌓 Toggle Dark Mode</div>
+  </div>
+
+  <div class="main">
+    <div class="resource-welcome">
+      <h2>👋 Welcome to Resources</h2>
+      <p>Explore topics and find helpful content!</p>
+    </div>
+    
+    <div id="coding" class="resources" style="display: none;">
+      <h2 class="section-heading">Coding Topics</h2>
+      <div id="subtopics-container" class="subtopics">
+        <div class="subtopic" onclick="showCodingTopic('java', 'java')">Java</div>
+        <div class="subtopic" onclick="showCodingTopic('python')">Python</div>
+        <div class="subtopic" onclick="showCodingTopic('webdev')">Web Dev</div>
+        <div class="subtopic" onclick="showCodingTopic('dsa')">DSA</div>
+        <div class="subtopic" onclick="showCodingTopic('sql')">SQL</div>
+      </div>
+      <div id="java" class="coding-resources">
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLqleLpAMfxGAdqZeY_4uVQOPCnAjhH-eT" target="_blank">Java Playlist 1</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLfqMhTWNBTe3LtFWcvwpqTkUSlB32kJop&si=S-pEStuPbxEbGR1-" target="_blank">Java Playlist 2</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5&si=zIT_jbckVOlFqjKi" target="_blank">Java Video</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLBlnK6fEyqRjKA_NuK9mHmlk0dZzuP1P5&si=5ECaTYUQcMNWT2Ps" target="_blank">Intro Java</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PL6W8uoQQ2c63f469AyV78np0rbxRFppkx&si=SA-Du0lWYnYL6H_G" target="_blank">Java OOPs</a>
+        <button onclick="goBack()">Back</button>
+      </div>
+      <div id="python" class="coding-resources" style="display:none;">
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLGjplNEQ1it8-0CmoljS5yeV-GlKSUEt0&si=a4Z5sgg_blWRVf7C" target="_blank">Python Full Course</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLdo5W4Nhv31bZSiqiOL5ta39vSnBxpOPT&si=Xah1eeTZqcEzRy5M" target="_blank">Python-Basic to Advance</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3&si=0PzmFW9fRNuxnjQo" target="_blank">Python for Beginners</a>
+        <button onclick="goBack()">Back</button>
+      </div>
+      <div id="webdev" class="coding-resources" style="display:none;">
+        <a class="resource-link" href="https://youtube.com/playlist?list=PL2Kd-KQLppEFbfdJHywOu6b_GAjn3LxE1&si=iUbG95HseSiYBTSa" target="_blank">Web Dev Full Course</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLDzeHZWIZsTo0wSBcg4-NMIbC0L8evLrD&si=GhOim513RgrMhT3u" target="_blank">Complete Web Dev </a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLhzIaPMgkbxDxVcH-M-JFM73PY1R_i2mK&si=6E0hOD2yZJz59664" target="_blank">Web Dev for Beginners</a>
+        <button onclick="goBack()">Back</button>
+      </div>
+      <div id="dsa" class="coding-resources" style="display:none;">
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLgUwDviBIf0oF6QL8m22w1hIDC1vJ_BHz&si=6aPe_SXUFyzZXsAA" target="_blank">A2Z DSA</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&si=-IWhCWjytZJJJJdv" target="_blank">DSA by Apna College</a>
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLxgZQoSe9cg0df_GxVjz3DD_Gck5tMXAd&si=OXqaHaSVamJ8CETv" target="_blank">DSA using C++</a>
+        <button onclick="goBack()">Back</button>
+      </div>
+      <div id="sql" class="coding-resources" style="display:none;">
+        <a class="resource-link" href="https://youtube.com/playlist?list=PLNcg_FV9n7qZY_2eAtUzEUulNjTJREhQe&si=_kQccLiZcoRUvq6a" target="_blank">SQL Bootcamp Playlist</a>
+        <a class="resource-link" href="https://youtu.be/7S_tz1z_5bA?si=tJ5PMKpkQpUD8sIj" target="_blank">SQL for Beginners</a>
+        <a class="resource-link" href="https://youtu.be/hlGoQC332VM?si=iYZYuoFEKgrK5ulH" target="_blank">SQL Full Course</a>
+        <button onclick="goBack()">Back</button>
+      </div>
+    </div>
+    
+
+    <!-- Placeholder sections for other subjects -->
+    <div id="maths" class="resources" style="display: none;">
+  <h2 class="section-heading">Maths Topics</h2>
+  <div id="subtopics-container" class="subtopics">
+    <div class="subtopic" onclick="showMathsTopic('algebra')">Algebra</div>
+    <div class="subtopic" onclick="showMathsTopic('calculus')">Calculus</div>
+    <div class="subtopic" onclick="showMathsTopic('geometry')">Geometry</div>
+    <div class="subtopic" onclick="showMathsTopic('trigonometry')">Trigonometry</div>
+    <div class="subtopic" onclick="showMathsTopic('statistics')">Statistics</div>
+    <div class="subtopic" onclick="showMathsTopic('probability')">Probability</div>
+  </div>
+
+  <!-- Algebra Topic Resources -->
+  <div id="algebra" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLbu_fGT0MPsvj-vBNsKMtrvwLEGdLNjzl&si=FsBjvsgVKg8rBAd_" target="_blank">Vector Algebra</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLG4bwc5fquzgkOZZOd21O_jm_YwRJQ8t3&si=DlMyXMjfKWGGWnnM" target="_blank">Aptitude Algebra</a>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Calculus Topic Resources -->
+  <div id="calculus" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://youtu.be/HfACrKJ_Y2w?si=gjQgAp4-vJgiHWxk" target="_blank">Calculus Full Course</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLF797E961509B4EB5&si=JMcxgr2KlIE_bBQp" target="_blank">Calculus Fundamentals</a>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Geometry Topic Resources -->
+  <div id="geometry" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://youtube.com/playlist?list=PL0o_zxa4K1BVkRxCZubMPcCJ5Q5QwZdEM&si=T-8M3T0U4odySESx" target="_blank">Geometry for Beginners</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLG4bwc5fquziUvO3dlzG0MW9vqi3epud4&si=ffws9DrxaCf8QwSL" target="_blank">Aptitude Geometry </a>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Trigonometry Topic Resources -->
+  <div id="trigonometry" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://youtube.com/playlist?list=PL0o_zxa4K1BVCB8iCVCGOES9pEF6byTMT&si=Js05wKbxQa9hnYpa" target="_blank">Trigonometry for Beginners</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLbu_fGT0MPsuXDAHsZQXch3bVIe1m2Xzd&si=ZdJ0blMmin4ggVt4" target="_blank">Trigonometry for Class 11</a>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Statistics Topic Resources -->
+  <div id="statistics" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://youtube.com/playlist?list=PL0o_zxa4K1BVsziIRdfv4Hl4UIqDZhXWV&si=ky68k2uRn3808k5T" target="_blank">Statistics Basics</a>
+    <a class="resource-link" href="https://youtu.be/xxpc-HPKN28?si=d9h7cCcXGBBJUMpR" target="_blank">Statistics Explained</a>
+    <button onclick="goBack()">Back</button>
+  </div>
+
+  <!-- Probability Topic Resources -->
+  <div id="probability" class="maths-resources" style="display:none;">
+    <a class="resource-link" href="https://www.youtube.com/live/oEvF9O2bE1s?si=sH1JCnmc1nVo3WNK" target="_blank">Probability Theory</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLMrJAkhIeNNR3sNYvfgiKgcStwuPSts9V&si=FI04qHMe41ygvjhh" target="_blank">Probability Bootcamp</a>
+    <button onclick="goBack()">Back</button>
+  </div>
+</div>
+
+    <div id="science" class="resources"><h2>Science Resources</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLv2hpilqtBVkRxWmT1QfAJQIvTrloqE0p&si=JqSD2KMgHLUu2G1F">Science for Class 10 </a>
+      <a class="resource-link" href="https://youtube.com/playlist?list=PLwSTdlvOT9ecJm3KgccP308GXQhmhkMXg&si=E6v7AA112bTZ0nha">Science for Class 9</a>
+    </div>
+    <div id="social" class="resources"><h2>Social Resources</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLmuzZ5pm7vk4_PjzpmPShE-qxV2PmqjnZ&si=aoc3llO4cMuhP5jE">Social Studies for Class 9</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PL5Z7ZVj5DNVe0Q8rJn6i13bQrlvlkx61V&si=SlTmVfbCQbrjDm8s">Social Studies for Class 10</a></div>
+    <div id="cp" class="resources"><h2>CP Resources</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLcXpkI9A-RZI-xF76L0sZq_u-k_yHz8pd&si=csJG2RVN-s6Oytgw">Dynamic Programming</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLgUwDviBIf0rAuz8tVcM0AymmhTRsfaLU&si=4qKtGQ8-xz5aWfFI">Linkedlist</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLgUwDviBIf0pOd5zvVVSzgpo6BaCpHT9c&si=wF-7Ua7x3-LBgRSv">Stack</a>
+  </div>
+    <div id="os" class="resources"><h2>Operating Systems</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLDzeHZWIZsTr3nwuTegHLa2qlI81QweYG&si=_WPD6pw90fueB5ti">Operating System Full Course</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O&si=kIn2lNGo3cIeR5c3">Operating System Tutorials</a></div>
+    <div id="cn" class="resources"><h2>Computer Networks</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_&si=hNso7lyi7nlrVOGp">Computer Networks Full Course</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLOG_8OlGMp73hMyn-WX1M2Q4ON98DmaRq&si=m86mxgE5Bj7O2HXH">Computer Networks T</a></div>
+    <div id="languages" class="resources">
+      <h2>Languages</h2>
+
+      <div id="language-buttons">
+        <button onclick="showContent('english')">English</button>
+        <button onclick="showContent('telugu')">Telugu</button>
+        <button onclick="showContent('hindi')">Hindi</button>
+      </div>
+      
+      <div id="language-content"></div>
+    </div>
+      
+    <div id="physics" class="resources"><h2>Physics Resources</h2><a class="resource-link" href="https://youtube.com/playlist?list=PLbu_fGT0MPsuUzCT6BZvto0hkcA3dEigi&si=gHeAoa528SW2NBAs">Physics for Class 11</a>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PL_aKL95N88s1hsS3NDbjkZvURgJLDJ3iv&si=XBOBeikDDmLJSA9d">Physics Made Easy</a></div>
+    <div id="chemistry" class="resources"><h2>Chemistry Resources</h2>
+    <a class="resource-link" href="https://youtube.com/playlist?list=PLCtUyOrCJbxyU8mDYt3jmTTLMQrMM7ECb&si=w5fKeDEt0A5tu1gf">Chemistry Playlist for Class 11</a>
+  <a class="resource-link" href="https://youtube.com/playlist?list=PLCtUyOrCJbxyx5ay0Zfh8UgdCzitoP-IL&si=Jww7YYJbkO3XDZrE">Chemistry Playlist for Class 12</a>
+  </div>
+
+  <script>
+    function showResources(id) {
+       // Track resource access
+    trackResourceAccess(id);
+    
+    // Hide all resource sections
+    document.querySelectorAll('.resources').forEach(el => el.style.display = 'none');
+
+    // Hide all coding topic content inside coding section
+    document.querySelectorAll('.coding-resources, .maths-resources').forEach(el => el.style.display = 'none');
+
+    // Show selected section
+    const section = document.getElementById(id);
+    if (section) section.style.display = 'block';
+  }
+
+  function showCodingTopic(topicId) {
+    // Track resource access
+    trackResourceAccess('coding', topicId);
+    
+    // Hide all other subtopics
+    document.querySelectorAll('.coding-resources').forEach(el => {
+      el.style.display = 'none';
+    });
+
+    // Hide subtopic buttons
+    const subtopics = document.querySelector('#coding .subtopics');
+    if (subtopics) subtopics.style.display = 'none';
+
+    // Show the selected subtopic content
+    document.getElementById(topicId).style.display = 'block';
+  }
+
+  function showMathsTopic(topicId) {
+    // Track resource access
+    trackResourceAccess('maths', topicId);
+    
+    document.querySelectorAll('.maths-resources').forEach(el => {
+      el.style.display = 'none';
+    });
+
+    const subtopics = document.querySelector('#maths .subtopics');
+    if (subtopics) subtopics.style.display = 'none';
+
+    document.getElementById(topicId).style.display = 'block';
+  }
+
+  function goBack() {
+    // Hide all subtopic resources
+    document.querySelectorAll('.coding-resources, .maths-resources').forEach(el => {
+      el.style.display = 'none';
+    });
+
+    // Show all subtopic buttons again
+    document.querySelectorAll('.resources .subtopics').forEach(el => {
+      el.style.display = 'flex';
+    });
+  }
+
+  function toggleMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  function showContent(language) {
+    // Track resource access
+    trackResourceAccess('languages', language);
+    
+    let content = "";
+
+    if (language === "english") {
+      content = `
+        <h3>English Resources:</h3>
+        <ul>
+          <li><a href="https://www.grammarly.com/" target="_blank">Grammarly</a></li>
+          <li><a href="https://www.bbc.co.uk/learningenglish" target="_blank">BBC Learning English</a></li>
+          <li><a href="https://dictionary.cambridge.org/" target="_blank">Cambridge Dictionary</a></li>
+        </ul>
+      `;
+    } else if (language === "telugu") {
+      content = `
+        <h3>Telugu Resources:</h3>
+        <ul>
+          <li><a href="https://youtube.com/playlist?list=PLoMvyTqu3jNU6dSBydv8ckLdueg3ACUrd&si=3UFe6n_sninCSqFa" target="_blank">Learn Telugu Online</a></li>
+          <li><a href="https://youtube.com/playlist?list=PLoMvyTqu3jNUHFCNZkZIQcK28esvkSt3x&si=EIfCbtiqn_RqDWjB" target="_blank">Telugu Learning YouTube Playlist</a></li>
+        </ul>
+      `;
+    } else if (language === "hindi") {
+      content = `
+        <h3>Hindi Resources:</h3>
+        <ul>
+          <li><a href="https://www.typingbaba.com/" target="_blank">Hindi Typing Practice</a></li>
+          <li><a href="https://youtube.com/playlist?list=PLvzfPLz7LrF7GO4NqnH1tNtzRW0JwLZDE&si=mCg7vap-Bi9Hrl4a" target="_blank">Learn Hindi YouTube Playlist</a></li>
+        </ul>
+      `;
+    }
+
+    document.getElementById('language-content').innerHTML = content;
+  }
+
+  // Track resource access function - stores only 3 most recent
+  function trackResourceAccess(topic, subtopic = null) {
+    let recentResources = JSON.parse(localStorage.getItem("recentResources") || "[]");
+    
+    // Remove if already exists
+    recentResources = recentResources.filter(res => 
+      !(res.topic === topic && res.subtopic === subtopic)
+    );
+    
+    // Add to beginning
+    recentResources.unshift({
+      topic: topic,
+      subtopic: subtopic,
+      timestamp: new Date().getTime()
+    });
+    
+    // Keep only last 3
+    if (recentResources.length > 3) {
+      recentResources = recentResources.slice(0, 3);
+    }
+    
+    localStorage.setItem("recentResources", JSON.stringify(recentResources));
+  }
+
+  // Load target resource when page loads
+  window.addEventListener('DOMContentLoaded', () => {
+    const targetResource = JSON.parse(localStorage.getItem("targetResource"));
+    if (targetResource) {
+      const { topic, subtopic } = targetResource;
+      showResources(topic);
+      
+      if (subtopic) {
+        setTimeout(() => {
+          if (topic === 'coding') {
+            showCodingTopic(subtopic);
+          } else if (topic === 'maths') {
+            showMathsTopic(subtopic);
+          } else if (topic === 'languages') {
+            showContent(subtopic);
+          }
+        }, 100);
+      }
+      
+      // Clear the target resource after loading
+      localStorage.removeItem("targetResource");
+    }
+  });
+  </script>
+
+</body>
+</html>

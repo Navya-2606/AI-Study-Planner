@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2>Welcome, <span id="currentUser"></span></h2>
+        <a href="chatlogin.html" class="logout-btn">Logout</a>
+      </div>
+
+      <div class="section">
+        <h3>Send Friend Request</h3>
+        <input type="text" id="addUser" placeholder="Enter user ID">
+        <button onclick="sendRequest()">Send Request</button>
+      </div>
+
+      <div class="section">
+        <h3>Requests</h3>
+        <ul id="requests"></ul>
+      </div>
+
+      <div class="section">
+        <h3>Friends</h3>
+        <ul id="friends"></ul>
+      </div>
+    </div>
+
+    <!-- Chat area -->
+    <div class="chat-area">
+      <div class="chat-header">Chat with <span id="chatWith"></span></div>
+      <div id="chatBox" class="chat-box"></div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Type a message" />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script12.js"></script>
+</body>
+</html>

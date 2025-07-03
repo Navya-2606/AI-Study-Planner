@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Study Fetch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Same styling as before */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #2E1B50;
+            position: relative;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #2E1B50;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+        }
+        .left {
+            flex: 1;
+            background: #402A65;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .left img {
+            width: 100%;
+            max-width: 400px;
+        }
+        .right {
+            flex: 1;
+            padding: 50px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        .right h2 {
+            color: #2E1B50;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .input-group {
+            margin-top: 20px;
+        }
+        .input-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2E1B50;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #2E1B50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .google-btn img {
+            width: 20px;
+        }
+        .register {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .register a {
+            color: #2E1B50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="back-btn">Back</button>
+    
+    <div class="container">
+        <div class="left">
+            <img src="left.png" alt="Left Image"> <!-- Change to your correct image path -->
+            <p>Interactive learning with AI</p>
+        </div>
+        
+        <div class="right">
+            <img src="logo3.jpeg" alt="Study Fetch Logo" class="logo"> <!-- Add your logo -->
+            <h2>Register</h2>
+            <p>We are excited to have you on board. It's time to ace your exams!</p>
+            
+            <div class="input-group">
+                <label>Your Email</label>
+                <input type="email" id="regEmail" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label>Your Password</label>
+                <input type="password" id="regPassword" placeholder="Enter your password">
+            </div>
+
+            <button class="btn" id="registerBtn">Continue</button>
+
+            <div class="register">
+                <p>I already have an account <a href="login.html">Login</a></p> <!-- Corrected login link -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+document.querySelector(".back-btn").addEventListener("click", () => {
+    window.location.href = "home.html";
+});
+
+document.getElementById("registerBtn").addEventListener("click", async () => {
+    const email = document.getElementById("regEmail").value.trim();
+    const password = document.getElementById("regPassword").value.trim();
+
+    if (email && password) {
+        try {
+            const res = await fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+
+            if (res.status === 201) {
+                alert(data.message);
+                window.location.href = "login.html";
+            } else {
+                alert(data.message || "Registration failed");
+            }
+        } catch (err) {
+            alert("Something went wrong");
+        }
+    } else {
+        alert("Please enter both email and password.");
+    }
+});
+</script>
+
+</body>
+</html>

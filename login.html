@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #2E1B50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            background: transparent; /* Removed white background */
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+        .left {
+            flex: 1;
+            background: #402A65;/* Removed white background */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        .left img {
+            width: 100%;
+            max-width: 400px;
+        }
+        .right {
+            flex: 1;
+            padding: 50px;
+            position: relative;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+
+        }
+        .right h2 {
+            color: #2E1B50;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .input-group {
+            margin-top: 20px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #2E1B50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .register {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .register a {
+            color: #2E1B50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            color: #2E1B50;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        /* Logo inside right section aligned to the rightmost */
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn">Back</button>
+    
+    <div class="container">
+        <div class="left">
+            <img src="left.png">
+            <p>Interactive learning with AI</p>
+        </div>
+        
+        <div class="right">
+            <img src="logo3.jpeg" class="logo"> <!-- Logo inside rightmost side -->
+            <h2>Login</h2>
+            <p>Welcome back! Let’s get you back to studying.</p>
+            <div class="input-group">
+                <label>Your Email</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
+            <div class="input-group">
+                <label>Your Password</label>
+                <input type="password" placeholder="Enter your password">
+            </div>
+            <button class="btn">Login</button>
+        
+            <div class="register">
+                <p>Don’t have an account? <a href="signup.html">Register</a>
+                </p>
+                <p>Forgot your password? <a href="reset.html">Reset Password</a></p>
+            </div>
+        </div>
+    </div>
+<<script>
+document.querySelector(".btn").addEventListener("click", async () => {
+    const email = document.querySelector('input[type="email"]').value.trim();
+    const password = document.querySelector('input[type="password"]').value.trim();
+
+    try {
+        const res = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.status === 200) {
+            alert(data.message);
+            // ✅ Save token and email to localStorage
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userEmail", email);
+            // Redirect to dashboard
+            window.location.href = "index.html";
+        } else {
+            alert(data.message || "Login failed");
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Something went wrong");
+    }
+});
+</script>
+
+
+</body>
+</html>

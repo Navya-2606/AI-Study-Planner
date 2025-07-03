@@ -1,0 +1,462 @@
+/* Reset & Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #c8c1ff 0%, #e4dfff 100%);
+  color: #4a4a6a;
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 48px;
+  user-select: none;
+  text-shadow: 0 2px 8px rgba(150, 140, 190, 0.3);
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 3.4rem;
+  letter-spacing: 2px;
+  color: #5f5e8f;
+}
+
+/* Summary Box */
+.summary-box {
+  background: rgba(230, 225, 255, 0.75);
+  backdrop-filter: blur(12px);
+  max-width: 920px;
+  width: 95%;
+  padding: 48px 60px;
+  border-radius: 28px;
+  box-shadow: 0 18px 60px rgba(190, 180, 255, 0.5);
+  margin-bottom: 60px;
+  transition: box-shadow 0.6s ease;
+}
+
+.summary-box:hover {
+  box-shadow: 0 26px 90px rgba(200, 190, 255, 0.8);
+}
+
+.summary-box p {
+  font-size: 1.35rem;
+  margin: 14px 0;
+  font-weight: 600;
+  color: #5a5792;
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6);
+}
+
+/* Animated Gradient Progress Bar */
+.progress-container {
+  background: rgba(245, 242, 255, 0.5);
+  border-radius: 20px;
+  height: 40px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(170, 160, 255, 0.4);
+  margin: 32px 0 38px 0;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  border-radius: 20px 0 0 20px;
+  background: linear-gradient(90deg, #b9afff, #9c92ff, #b9afff);
+  box-shadow: 0 0 40px #c5c0ff;
+  animation: fillBar 2s ease forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0%; }
+  to { width: var(--progress-width); }
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 1.15rem;
+  color: #5b5980;
+  max-width: 900px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+ul li {
+  padding: 14px 22px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  background: rgba(220, 215, 255, 0.65);
+  box-shadow: 0 4px 14px rgba(175, 170, 230, 0.35);
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  color: #5e5d8a;
+}
+
+ul li:hover {
+  background: rgba(200, 190, 255, 0.85);
+  transform: translateX(8px);
+  color: #433f7b;
+  box-shadow: 0 8px 28px #aa9fff;
+}
+
+/* Progress Sections Layout */
+.progress-sections {
+  max-width: 900px;
+  width: 90%;
+  margin: 0 auto 60px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 68px;
+}
+
+.progress-block {
+  background: rgba(230, 225, 255, 0.75);
+  backdrop-filter: blur(14px);
+  padding: 32px 42px;
+  border-radius: 28px;
+  box-shadow: 0 14px 48px rgba(180, 170, 240, 0.65);
+  transition: box-shadow 0.5s ease;
+}
+
+.progress-block:hover {
+  box-shadow: 0 18px 60px rgba(190, 180, 255, 0.85);
+}
+
+.progress-block h3 {
+  margin-bottom: 30px;
+  font-weight: 800;
+  color: #5b5980;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
+/* Flex container to place list and chart side-by-side */
+.progress-content {
+  display: flex;
+  gap: 44px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.progress-content ul {
+  flex: 1 1 320px;
+  max-height: 340px;
+  overflow-y: auto;
+  list-style: none;
+  padding-left: 0;
+  color: #5b5980;
+  font-size: 1.1rem;
+  user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: #b3abff transparent;
+}
+
+.progress-content ul::-webkit-scrollbar {
+  width: 7px;
+}
+
+.progress-content ul::-webkit-scrollbar-thumb {
+  background-color: #b3abff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+}
+
+.progress-content ul li {
+  background: rgba(230, 225, 255, 0.8);
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(180, 170, 230, 0.25);
+  transition: background 0.3s ease, transform 0.3s ease;
+  color: #5a5792;
+}
+
+.progress-content ul li:hover {
+  background: rgba(210, 205, 255, 0.95);
+  transform: translateX(6px);
+  color: #3c3a63;
+  box-shadow: 0 6px 20px #c1baff;
+}
+
+/* Chart styles */
+.progress-content canvas {
+  flex: 1 1 320px;
+  max-width: 420px;
+  height: 340px !important; /* Keep same height as list */
+  background: rgba(230, 225, 255, 0.8);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 16px 48px rgba(180, 175, 230, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.progress-content canvas:hover {
+  box-shadow: 0 24px 72px rgba(190, 185, 255, 0.7);
+}
+
+/* Completion Section */
+.completion-section {
+  max-width: 440px;
+  margin: 0 auto 60px auto;
+  background: rgba(220, 215, 255, 0.85);
+  padding: 32px 48px;
+  border-radius: 28px;
+  box-shadow: 0 14px 48px rgba(180, 170, 240, 0.7);
+  text-align: center;
+  transition: box-shadow 0.4s ease;
+}
+
+.completion-section:hover {
+  box-shadow: 0 18px 60px rgba(190, 180, 255, 0.9);
+}
+
+.completion-section h3 {
+  margin-bottom: 32px;
+  color: #5b5980;
+  font-weight: 800;
+  text-shadow: 0 2px 5px rgba(255, 255, 255, 0.8);
+}
+
+.completion-section canvas {
+  max-width: 320px;
+  margin: 0 auto;
+  height: 320px !important;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .summary-box, .progress-sections, .completion-section {
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  ul li {
+    font-size: 1.05rem;
+  }
+
+  .progress-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progress-content ul,
+  .progress-content canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+}
+/* Add cursor pointer and subtle scaling on hover for summary box */
+.summary-box {
+  cursor: default;
+  transition: box-shadow 0.5s ease, transform 0.3s ease;
+}
+
+.summary-box:hover {
+  box-shadow: 0 26px 90px rgba(200, 190, 255, 0.8);
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* Make list items feel clickable with pointer cursor and active feedback */
+ul li {
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+ul li:hover {
+  background: rgba(200, 190, 255, 0.95);
+  transform: translateX(8px) scale(1.03);
+  color: #3c3a63;
+  box-shadow: 0 10px 28px #c1baff;
+}
+
+/* Add active state for click/tap */
+ul li:active {
+  transform: translateX(3px) scale(0.98);
+  box-shadow: 0 4px 12px #a599e6;
+  background: rgba(180, 170, 230, 0.9);
+}
+
+/* Keyboard focus outline for accessibility */
+ul li:focus-visible {
+  outline: 3px solid #8f7cff;
+  outline-offset: 4px;
+}
+
+/* Animate progress bar gradient infinitely */
+.progress-bar {
+  animation: fillBar 2s ease forwards, moveGradient 6s linear infinite;
+  background-size: 300% 100%;
+}
+
+@keyframes moveGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Add subtle floating effect on charts on hover */
+.progress-content canvas {
+  transition: box-shadow 0.3s ease, transform 0.4s ease;
+}
+
+.progress-content canvas:hover {
+  box-shadow: 0 24px 72px rgba(190, 185, 255, 0.7);
+  transform: translateY(-8px) scale(1.04);
+}
+
+/* Add slight parallax movement on summary box text on hover */
+.summary-box:hover p {
+  transform: translateX(4px);
+  transition: transform 0.4s ease;
+}
+
+/* Completion section with pulse effect on hover */
+.completion-section:hover {
+  animation: pulseGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 18px 60px rgba(190, 180, 255, 0.9);
+  }
+  100% {
+    box-shadow: 0 26px 90px rgba(210, 195, 255, 1);
+  }
+}
+
+/* Make hover animations smooth and consistent */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow, background-color;
+}
+.progress-bar {
+  width: 0;
+  animation: fillBar 2s ease forwards;
+  background: linear-gradient(90deg, #d4ccff, #8f7cff, #d4ccff);
+  box-shadow: 0 0 28px #bdb1ff;
+  border-radius: 16px 0 0 16px;
+}
+
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: var(--progress-width); }
+}
+.badges-section {
+  max-width: 900px;
+  margin: 0 auto 60px auto;
+  background: rgba(235, 230, 255, 0.85);
+  padding: 36px 48px;
+  border-radius: 28px;
+  box-shadow: 0 14px 48px rgba(180, 170, 240, 0.6);
+  text-align: center;
+  transition: box-shadow 0.4s ease;
+}
+
+.badges-section:hover {
+  box-shadow: 0 18px 60px rgba(190, 180, 255, 0.9);
+}
+
+.badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.badge {
+  background: linear-gradient(145deg, #e2ddff, #f3f0ff);
+  border-radius: 18px;
+  padding: 16px 24px;
+  box-shadow: 0 8px 24px rgba(160, 150, 220, 0.3);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #5a5792;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 36px rgba(150, 140, 210, 0.5);
+}
+
+.badge-icon {
+  font-size: 1.5rem;
+}
+.badge {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.badge:nth-child(1) { animation-delay: 0.1s; }
+.badge:nth-child(2) { animation-delay: 0.2s; }
+.badge:nth-child(3) { animation-delay: 0.3s; }
+.badge:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Feedback container */
+#feedbackMessage {
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  background: linear-gradient(135deg, #7c3aed, #a87bff);
+  text-align: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for feedback box */
+#feedbackMessage:hover {
+  background: linear-gradient(135deg, #a87bff, #7c3aed);
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.5);
+}
+
+/* Variants for different feedback tones */
+#feedbackMessage.positive {
+  background: linear-gradient(135deg, #16a34a, #4ade80); /* green shades */
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+#feedbackMessage.warning {
+  background: linear-gradient(135deg, #f59e0b, #fcd34d); /* yellow shades */
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  color: #333;
+}
+
+#feedbackMessage.neutral {
+  background: linear-gradient(135deg, #6b7280, #9ca3af); /* gray shades */
+  box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
+  color: #eee;
+}
+
+

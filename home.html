@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Fetch Clone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sty1.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #1F1D36;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: auto;
+        }
+
+        .logoimage img {
+            width: 180px;
+            height: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        nav ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li:hover {
+            color: #3D82F6;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn, .signup-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background: #332D49;
+            color: white;
+        }
+
+        .signup-btn {
+            background: #332D49;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: #3D82F6;
+            transform: translateY(-2px);
+        }
+
+        .signup-btn:hover {
+            background: #2A64C0;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content Styles */
+        .hero-section {
+            text-align: center;
+            padding: 80px 5% 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .changing-word {
+            display: inline-block;
+            color: #38D39F;
+            font-weight: bold;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .course-material {
+            font-weight: bold;
+            font-style: italic;
+            color: #3D82F6;
+        }
+
+        .roles {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            margin: 40px 0;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .role {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .role:hover {
+            transform: translateY(-5px);
+        }
+
+        .role img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .cta-buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .blue-btn {
+            background: #3D82F6;
+            color: white;
+        }
+
+        .dark-btn {
+            background: #332D49;
+            color: white;
+        }
+
+        .green-btn {
+            background: #38D39F;
+            color: white;
+        }
+
+        /* Interactive Elements Section */
+        .features-section {
+            padding: 0px 5%;
+            position: relative;
+            background: linear-gradient(to bottom, #F8F9FA, #FFFFFF);
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 2px solid #7a5cff;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .feature-card h2 {
+            margin-bottom: 20px;
+            color: #2E1B50;
+        }
+
+        .upload-box {
+            border: 3px dashed #7a5cff;
+            padding: 30px;
+            margin: 20px 0;
+            background: #f5f5ff;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-box:hover {
+            background: #e8e6ff;
+        }
+
+        .action-btn {
+            background: #7a5cff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .action-btn:hover {
+            background: #6a4cee;
+            transform: translateY(-2px);
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #666;
+            margin-top: 15px;
+        }
+
+        .decorative-element {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .robot-dog {
+            width: 300px;
+            position: absolute;
+            left: -210px;
+            bottom: -120px;
+            height: auto;
+        }
+
+        .robot-dog img {
+            left: 0;
+            width: 100%;
+            margin-left: 20px;
+        }
+        
+        .books {
+            position: absolute;
+            right: 550px;
+            bottom: -150px;
+        }
+
+        .books img {
+            width: 150px;
+        }
+
+        .globe {
+            position: absolute;
+            right: -200px;
+            bottom: -100px;
+        }
+
+        .globe img {
+            margin-top: 30px;
+            width: 300px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 200px 5%;
+            background: white;
+            text-align: center;
+        }
+
+        .stats-header {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .highlight {
+            background-color: #fddde6;
+            padding: 5px 15px;
+            border-radius: 8px;
+            font-size: 2.5rem;
+            display: inline-block;
+            font-weight: 700;
+            color: #2d2355;
+            margin-bottom: 20px;
+        }
+
+        .stats-header h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #2d2355;
+        }
+
+        .stats-cta {
+            background: #1dc690;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stats-cta:hover {
+            background: #18b582;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(29, 198, 144, 0.2);
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2d2355;
+        }
+
+        .stat-card p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .blue-stat {
+            background-color: #edf4ff;
+        }
+
+        .yellow-stat {
+            background-color: #fff6cc;
+        }
+
+        .purple-stat {
+            background-color: #eeeaff;
+        }
+
+        .progress-bar {
+            display: flex;
+            height: 10px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #e0e0e0;
+            margin-top: 20px;
+        }
+
+        .progress-segment {
+            height: 100%;
+        }
+
+        .green-segment {
+            background-color: #1dc690;
+            width: 85%;
+        }
+
+        .yellow-segment {
+            background-color: #f9d648;
+            width: 10%;
+        }
+
+        .red-segment {
+            background-color: #ff5e5e;
+            width: 5%;
+        }
+
+        .chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 15px;
+            height: 100px;
+            margin: 20px 0;
+        }
+
+        .chart-bar {
+            width: 40px;
+            border-radius: 6px;
+            transition: all 0.5s ease;
+        }
+
+        .yellow-bar {
+            height: 100%;
+            background-color: #f9d648;
+        }
+
+        .green-bar {
+            height: 70%;
+            background-color: #1dc690;
+        }
+
+        .gauge {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 30px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gauge-fill {
+            height: 100%;
+            width: 92%;
+            background: #a58eff;
+            border-radius: 10px;
+        }
+
+        .stat-image {
+            width: 80px;
+            margin: 20px auto 0;
+            display: block;
+        }
+
+        /* Insights Section */
+        .insights-section {
+            padding: 0px 5%;
+            background-color: #f4f0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .insights-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .insights-image {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .insights-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .insights-content {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .insights-content h1 {
+            font-size: 2.5rem;
+            color: #3b2a62;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .insights-content p {
+            font-size: 1.1rem;
+            color: #5e5c7f;
+            margin-bottom: 30px;
+        }
+
+        .insights-btn {
+            background-color: #3b2a62;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .insights-btn:hover {
+            background-color: #2a1d4a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 42, 98, 0.2);
+        }
+
+        /* Footer Styles */
+        /* Footer Styles */
+.curved-footer {
+    position: relative;
+    width: 100%;
+    margin-top: 150px;
+    overflow: hidden;
+    background-color: #2E1B50;
+    color: white;
+    padding-top: 100px;
+}
+
+.footer-curve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 5% 50px;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.footer-image.left {
+    position: relative;
+    z-index: 3;
+    width: 250px;
+    bottom: -50px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 60px;
+    margin-top: 30px;
+}
+
+.link-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.link-column ul {
+    list-style: none;
+}
+
+.link-column li {
+    margin-bottom: 12px;
+}
+
+.link-column a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-column a:hover {
+    color: white;
+}
+
+.footer-right {
+    max-width: 400px;
+    margin-top: 30px;
+}
+
+.newsletter h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.newsletter p {
+    margin-bottom: 15px;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.newsletter-form button {
+    background: #7a5cff;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: #6a4cee;
+}
+
+.social-media h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    position: relative;
+    z-index: 2;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.legal-links {
+    display: flex;
+    gap: 20px;
+}
+
+.legal-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+    color: white;
+}
+
+/* Responsive Footer Styles */
+@media (max-width: 1024px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-left {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-image.left {
+        width: 200px;
+        bottom: -30px;
+    }
+    
+    .footer-right {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    
+    .link-column {
+        min-width: 150px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .legal-links {
+        justify-content: center;
+    }
+    
+    .footer-image.left {
+        width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-image.left {
+        width: 150px;
+        bottom: -20px;
+    }
+    
+    .footer-content {
+        padding-top: 80px;
+    }
+}
+
+        /* Support Button */
+        .support-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #bcaeff;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .support-btn:hover {
+            background-color: #a58eff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .support-btn span {
+            font-weight: bold;
+            display: block;
+            margin-top: 3px;
+        }
+        
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+            
+            .roles {
+                gap: 50px;
+            }
+            
+            .robot-dog, .globe {
+                width: 250px;
+            }
+
+            .insights-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .insights-image, .insights-content {
+                width: 100%;
+            }
+
+            .insights-content {
+                text-align: center;
+            }
+
+            .insights-btn {
+                align-self: center;
+            }
+
+            .footer-image.left {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 15px 20px;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+                font-size: 16px;
+            }
+            
+            .header-right {
+                margin-left: auto;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+                padding: 0 10px;
+            }
+            
+            .roles {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .decorative-element {
+                position: relative;
+                margin: 30px auto;
+                width: 200px;
+                left: auto;
+                right: auto;
+                bottom: auto;
+            }
+            
+            .robot-dog, .books, .globe {
+                position: relative;
+                width: 200px;
+                margin: 30px auto;
+                transform: none;
+            }
+            
+            .stat-card {
+                min-width: 100%;
+            }
+
+            .footer-image.left {
+                width: 200px;
+                left: 20px;
+                bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-btn, .signup-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+
+            .insights-content h1 {
+                font-size: 2rem;
+            }
+
+            .insights-content p {
+                font-size: 1rem;
+            }
+            
+            .support-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .footer-image.left {
+                padding-bottom: 30px;
+                width: 150px;
+                left: 10px;
+                bottom: 40px;
+            }
+        }
+   /* Modal background blur and centering */
+#features-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Blurs the background */
+    background: rgba(0, 0, 0, 0.4); /* Dark transparent overlay */
+    display: none; /* Hidden initially */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal content box */
+.features-content {
+    background: #332152;
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Button inside modal */
+#close-features-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #7f56d9; /* Elegant purple from your site's vibe */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+#close-features-btn:hover {
+    background-color: #6941c6; /* Darker shade on hover */
+}
+
+/* Text inside the modal */
+.features-content h2 {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: white; /* Your site's main deep purple */
+    margin-bottom: 10px;
+}
+
+.features-content p {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 16px;
+    color:white;
+    margin-bottom: 20px;
+}
+
+/* List styling inside modal */
+.features-content ul {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.features-content ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color:white;
+}
+/*blog*/
+#blog-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Blurs the background */
+    background: rgba(0, 0, 0, 0.4); /* Dark transparent overlay */
+    display: none; /* Hidden initially */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal content box */
+.features-content {
+    background: #332152;
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Button inside modal */
+#close-blog-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #7f56d9; /* Elegant purple from your site's vibe */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+#close-blog-btn:hover {
+    background-color: #6941c6; /* Darker shade on hover */
+}
+
+/* Text inside the modal */
+.features-content h2 {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: white; /* Your site's main deep purple */
+    margin-bottom: 10px;
+}
+
+.features-content p {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 16px;
+    color:white;
+    margin-bottom: 20px;
+}
+
+/* List styling inside modal */
+.features-content ul {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+.features-content ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color:white;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="logo123.jpeg" alt="Study Fetch Logo"> 
+            <div class="logoimage">
+                <img src="logo4.jpeg" alt="Logo">
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li id="features-btn">Our Features</li>
+                <li id="blog-btn">Our Blog</li>
+                <li id="contact-btn" >Contact Us</li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <button class="login-btn" onclick="redirectToLogin()">Login</button>
+            <button class="signup-btn" onclick="redirectToSignup()">Sign Up</button>
+        </div>
+        <div id="features-modal" class="features-modal">
+            <div id="features-box" class="features-box">
+                <div class="features-content">
+                    <h2>Our Features</h2>
+                    <p>Discover the amazing features we offer to help you study better, stay organized, and improve your learning experience.</p>
+                    <ul>
+                        <li>AI-Powered Study Plan Generator</li>
+                        <li>Interactive Timetable</li>
+                        <li>Motivational Reminders</li>
+                        <li>Progress Tracking</li>
+                        <li>Customizable Themes</li>
+                    </ul>
+                    <button id="close-features-btn">Close</button>
+
+                </div>
+            </div>
+        </div>
+        <div id="blog-modal" class="features-modal"> <!-- Reuse the same modal class -->
+            <div id="blog-box" class="features-box">
+                <div class="features-content">
+                    <h2>Welcome to Our Blog</h2>
+                    <p>Stay tuned to exciting updates, study tips, AI trends, and much more. Here's what you’ll find on our blog:</p>
+                    <ul>
+                        <li>Latest in AI-driven Education Tools</li>
+                        <li>Top Study Hacks for Students</li>
+                        <li>Time Management Techniques</li>
+                        <li>Motivation and Mindfulness Tips</li>
+                        <li>Student Success Stories</li>
+                    </ul>
+                    <p>At Study Fetch, we are passionate about making your academic journey smoother, smarter, and more inspiring!</p>
+                    <button id="close-blog-btn">Close</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Create accurate <span class="changing-word">text</span> with AI from your <span class="course-material">course material</span> in seconds.</h1>
+        <div class="roles">
+            <div class="role"><img src="rocket.jpeg" alt="Rocket"> <span>For Students</span></div>
+            <div class="role"><img src="cap.jpeg" alt="Cap"> <span>For Educators</span></div>
+            <div class="role"><img src="institute.jpeg" alt="Institute"> <span>For Institutions</span></div>
+        </div>
+        <div class="cta-buttons">
+            <button class="cta-button blue-btn">Try for Free</button>
+            <button class="cta-button dark-btn">Get Started</button>
+            <button class="cta-button green-btn">Learn More</button>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-container">
+            <div class="decorative-element robot-dog">
+                <img src="e1.png" alt="Robot Dog">
+            </div>
+            
+            <div class="feature-card">
+                <h2>Create a Study Set</h2>
+                <div class="upload-box">Drag and Drop Your Files Here</div>
+                <button class="action-btn">Continue</button>
+            </div>
+            
+            <div class="feature-card">
+                <h2>Interactive Quizzes</h2>
+                <p class="progress-text">Current Set Progress: 1/10</p>
+                <div class="chart">
+                    <div class="chart-bar yellow-bar"></div>
+                    <div class="chart-bar green-bar"></div>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <h2>Select Flashcard Type</h2>
+                <button class="action-btn">Static Flashcards</button>
+                <button class="action-btn">Dynamic Flashcards</button>
+            </div>
+            
+            <div class="decorative-element books">
+               
+            </div>
+            
+            <div class="decorative-element globe">
+                <img src="g2.png" alt="Globe">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-header">
+            <h1><span class="highlight">Learning is hard</span></h1>
+            <h2>We make learning faster and more effective</h2>
+            <button class="stats-cta">Without taking shortcuts</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card blue-stat">
+                <h3>85%</h3>
+                <p>of Students Improved Their Grades</p>
+                <div class="progress-bar">
+                    <div class="progress-segment green-segment"></div>
+                    <div class="progress-segment yellow-segment"></div>
+                    <div class="progress-segment red-segment"></div>
+                </div>
+                <img src="study.png" alt="Study Mascot" class="stat-image">
+            </div>
+
+            <div class="stat-card yellow-stat">
+                <h3>30%</h3>
+                <p>Reduction in Study Time</p>
+                <div class="chart">
+                    <div class="chart-bar yellow-bar"></div>
+                    <div class="chart-bar green-bar"></div>
+                </div>
+                <img src="pic2.png" alt="Study Mascot" class="stat-image">
+            </div>
+
+            <div class="stat-card purple-stat">
+                <h3>92%</h3>
+                <p>Success Rate for Regular Active Users</p>
+                <div class="gauge">
+                    <div class="gauge-fill"></div>
+                </div>
+                <img src="book.png" alt="Success Mascot" class="stat-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="insights-section">
+        <div class="insights-container">
+            <div class="insights-image">
+                <img src="insight.png" alt="Insights Image">
+            </div>
+            <div class="insights-content">
+                <h1>Get Insights<br>Practice what matters<br>Track your progress</h1>
+                <p>Studyfetch automatically tracks your progress, giving you insights on your strengths and weaknesses and creating study tools that correspond with these insights.</p>
+                <button class="insights-btn">See Insights</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Section -->
+    <!-- Footer Section -->
+<footer class="curved-footer">
+    <footer id="contact" class="curved-footer"></footer>
+    <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="footer-curve">
+        <path fill="#2E1B50" fill-opacity="1" 
+              d="M0,224L80,208C160,192,320,160,480,154.7C640,149,800,171,960,165.3C1120,160,1280,128,1360,112L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z">
+        </path>
+    </svg>
+    <div class="footer-content">
+        <div class="footer-left">
+            <img src="pic.png" alt="Footer Image" class="footer-image left">
+   
+            <div class="footer-links">
+                <div class="link-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+                
+                <div class="link-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-right">
+            <div class="newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest updates</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2023 Study Fetch. All rights reserved.</p>
+        <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+        </div>
+    </div>
+    
+    
+</footer>
+    
+    <!-- Support Button -->
+    
+    <div class="support-btn">Need support? <span>Ask AI</span></div>
+    
+
+<div class="chat-popup hidden" id="chatPopup">
+  <div class="chat-header">
+    <h3>StudyBot 🤖</h3>
+    <button id="closeChatBtn">✖</button> <!-- Close button -->
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="bot-message">Hi! 👋 I'm your Study Assistant. How can I help you?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="userInput" placeholder="Ask me anything...">
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("Study Fetch Clone Loaded");
+            
+            // Text rotation animation
+            const words = ["test", "quizzes", "recommendations", "notes"];
+            let index = 0;
+            const changingWord = document.querySelector(".changing-word");
+            
+            function rotateText() {
+                changingWord.style.opacity = "0";
+                setTimeout(() => {
+                    changingWord.textContent = words[index];
+                    changingWord.style.opacity = "1";
+                    index = (index + 1) % words.length;
+                }, 300);
+            }
+            
+            setInterval(rotateText, 2000);
+            
+            // Initialize with first word
+            changingWord.textContent = words[0];
+            changingWord.style.opacity = "1";
+            
+            // Upload box interaction
+            const uploadBox = document.querySelector('.upload-box');
+            uploadBox.addEventListener('click', () => {
+                alert('Upload functionality will be implemented here.');
+            });
+            
+            // Button hover effects
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'translateY(-3px)';
+                });
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Support button interaction
+            
+            
+            // Card hover effects
+            const cards = document.querySelectorAll('.feature-card, .stat-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.boxShadow = '0 15px 35px rgba(0,0,0,0.12)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                });
+            });
+
+            // Insights button click handler
+            const insightsBtn = document.querySelector('.insights-btn');
+            insightsBtn.addEventListener('click', () => {
+                alert('Insights page will be shown here.');
+            });
+        });
+        
+        document.querySelector(".login-btn").addEventListener("click", () => {
+            window.location.href = "login.html"; // Redirect to Login Page
+        });
+
+        document.querySelector(".signup-btn").addEventListener("click", () => {
+            window.location.href = "signup.html"; // Redirect to Signup Page
+        });
+        function openFeatures() {
+    document.getElementById("features-modal").style.display = "flex";
+}
+
+function closeFeatures() {
+    document.getElementById("features-modal").style.display = "none";
+}
+
+// Open when "Our Features" button clicked
+document.getElementById("features-btn").addEventListener("click", openFeatures);
+
+// Close when "Close" button clicked inside modal
+document.getElementById("close-features-btn").addEventListener("click", closeFeatures);
+
+// (Optional) Close when clicking outside the box
+document.getElementById("features-modal").addEventListener("click", function(e) {
+    if (e.target === this) { // Only if background clicked
+        closeFeatures();
+    }
+});
+function openblog() {
+    document.getElementById("blog-modal").style.display = "flex";
+}
+
+function closeblog() {
+    document.getElementById("blog-modal").style.display = "none";
+}
+
+ // Open when "Our Features" button clicked
+document.getElementById("blog-btn").addEventListener("click", openblog);
+
+// Close when "Close" button clicked inside modal
+document.getElementById("close-blog-btn").addEventListener("click", closeblog);
+
+ // (Optional) Close when clicking outside the box
+document.getElementById("blog-modal").addEventListener("click", function(e) {
+    if (e.target === this) { // Only if background clicked
+        closeFeatures();
+    }
+});
+   document.getElementById('contact-btn').addEventListener('click', function() {
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    </script>
+   <script src="sc1.js"></script>
+</body>
+</html>

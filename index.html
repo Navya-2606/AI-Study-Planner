@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Study Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  
+  
+  <!-- Mascot -->
+  <img src="robo.png" class="mascot" alt="Cute AI Mascot">
+  
+  <!-- Dark Mode Toggle -->
+  <button class="dark-toggle" onclick="toggleDarkMode()">🌙</button>
+  
+  <!-- Hover Sound -->
+  <audio id="hoverSound" src="sounds/hover.mp3" preload="auto"></audio>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h2 class="logo">PlanIt AI</h2>
+    
+     
+    
+      <ul class="nav">
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="middlepage.html"><i class="fas fa-calendar-alt"></i> Time Table</a></li>
+        <li><a href="performance.html"><i class="fas fa-chart-line"></i> Performance</a></li>
+        <li><a href="resources.html"><i class="fas fa-book"></i> Resources</a></li>
+        <li><a href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+         <li><a href="chatlogin.html"><i class="fas fa-comment"></i> chat</a></li>
+        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+      </ul>
+    
+      
+      <div class="sidebar-bottom-image">
+        <img src="pi.png "alt="Study Image" />
+      </div>
+    </aside>
+    
+
+    <main class="main-content">
+     <h1 class="welcome" id="welcomeMessage">Welcome Back!</h1>
+
+    
+      <div class="cards">
+    
+        <div class="card">
+          <h3>Timetable</h3>
+          <p>Manage your study schedule efficiently:</p>
+          <div id="savedTimetablesContainer">
+            <ul id="savedTimetablesList"></ul>
+          </div>
+          <!-- New Image Placeholder -->
+          <div class="card-image">
+           
+          </div>
+        </div>
+    
+        <div class="card">
+          <h3>Performance</h3>
+        
+          <div class="semi-circle-progress">
+          
+    <div class="left-half"></div>
+    <div class="right-half"></div>
+          
+    
+  <div class="progress-text" id="progressText">0%</div>
+</div>
+
+
+
+  <!-- Progress Percentage will appear here -->
+  <div id="progressPercentage" class="progress-percentage"></div>
+
+          <!-- New Image Placeholder -->
+          <div class="card-image">
+           
+          </div>
+        </div>
+    
+        <div class="card">
+          <h3>Resources</h3>
+          <p>Recently accessed resources:</p>
+          <div id="recentResourcesContainer">
+            <ul id="recentResourcesList"></ul>
+          </div>
+
+          <!-- New Image Placeholder -->
+          <div class="card-image">
+            
+          </div>
+        </div>
+    
+      </div>
+      
+    </main>
+    
+  </div>
+
+  
+  <script>
+  const params = new URLSearchParams(window.location.search);
+  const email = params.get("user");
+  const welcomeText = email ? `Welcome Back, ${email.split("@")[0]}!` : "Welcome Back!";
+  document.getElementById("welcomeMessage").textContent = welcomeText;
+  const allTimetables = JSON.parse(localStorage.getItem("allTimetables") || "[]");
+
+  let totalTopics = 0;
+  let completedTopics = 0;
+
+  function generateTimetableId(plan) {
+    const planString = JSON.stringify(plan);
+    let hash = 0;
+    for (let i = 0; i < planString.length; i++) {
+      const char = planString.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash &= hash;
+    }
+    return 'timetable-' + Math.abs(hash).toString(16);
+  }
+
+  allTimetables.forEach(plan => {
+    const timetableId = generateTimetableId(plan);
+
+    plan.forEach((day, dayIndex) => {
+      if (!Array.isArray(day.topics)) return;
+
+      day.topics.forEach((topic, topicIndex) => {
+        totalTopics++;
+
+        const topicKey = `progress-${timetableId}-day${dayIndex}-topic${topicIndex}`;
+        const localStorageCompleted = localStorage.getItem(topicKey) === "true";
+        const topicCompleted = topic.completed === true;
+
+        if (localStorageCompleted || topicCompleted) {
+          completedTopics++;
+        }
+      });
+    });
+  });
+
+ function setSemiCircleProgress(percent) {
+  const leftHalf = document.querySelector('.left-half');
+  const rightHalf = document.querySelector('.right-half');
+  const progressText = document.getElementById('progressText');
+
+  progressText.textContent = `${percent}%`;
+
+  // Add smooth animation
+  rightHalf.style.transition = leftHalf.style.transition = 'transform 1s ease-in-out';
+
+  if (percent <= 50) {
+    rightHalf.style.transform = `rotate(${percent * 3.6}deg)`;
+    leftHalf.style.transform = 'rotate(0deg)';
+  } else {
+    rightHalf.style.transform = 'rotate(180deg)';
+    setTimeout(() => {
+      leftHalf.style.transform = `rotate(${(percent - 50) * 3.6}deg)`;
+    }, 500); // slight delay for smooth effect
+  }
+}
+
+// Example usage
+const progressPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+setSemiCircleProgress(progressPercent);
+document.getElementById("progressPercentage").textContent =
+  `Progress: ${progressPercent}% Complete`;
+
+
+
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>

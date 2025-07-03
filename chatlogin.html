@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Sign Up</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+  background: #f3e8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+    .container {
+      display: flex;
+      background: #72489c;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-section h1 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #080808;
+    }
+
+    .form-section p {
+      margin-bottom: 2rem;
+      color: #070707;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    input:focus {
+      border-color: #530c89;
+      outline: none;
+      box-shadow: 0 0 6px rgba(134, 37, 252, 0.3);
+    }
+
+    button {
+      padding: 0.9rem;
+      background-color: #0c0c0c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #1c1a1d;
+    }
+
+    .toggle-link {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .toggle-link a {
+      color: #6918ec;
+      text-decoration: none;
+    }
+
+    .toggle-link a:hover {
+      text-decoration: underline;
+    }
+
+    .image-section {
+      flex: 1;
+      background: url('ai-mascot.png') no-repeat center center;
+      background-size: cover;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        max-width: 95%;
+        margin: auto;
+      }
+
+      .image-section {
+        height: 250px;
+      }
+
+      .form-section {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-section"></div>
+
+    <div class="form-section">
+      <h1>Welcome Back </h1>
+      <p>Join to continue chatting with your friends</p>
+      <form action="/login" method="POST">
+        <input type="text" name="username" placeholder="Enter Username" required />
+        <input type="password" name="password" placeholder="Enter Password" required />
+        <button type="submit">Enter Chat</button>
+      </form>
+      
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Study Time Table Generator</title>
+
+  <link rel="stylesheet" href="style1.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>🧠 AI-Driven Study Time Table</h2>
+
+    <!-- New Professional Form -->
+    <div class="form-container">
+      <form id="timetableForm">
+        <div class="form-group">
+          <label for="daysLeft">📅 Days Left until Exam</label>
+          <input type="number" id="daysLeft" placeholder="e.g. 30" required>
+        </div>
+
+       
+
+        <div class="form-group">
+          <label for="topicsPriority">📝 Enter Topics (Comma Separated)</label>
+          <textarea id="topicsPriority" rows="3" placeholder="e.g. Algebra, Geometry, Trigonometry" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="difficulty">📊 Difficulty Levels (Comma Separated)</label>
+          <textarea id="difficulty" rows="3" placeholder="e.g. Easy, Medium, Hard" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="studyHoursPerDay">⏰ Study Hours per Day</label>
+          <input type="number" id="studyHoursPerDay" placeholder="e.g. 6" required>
+        </div>
+
+        
+
+        <button type="submit">✨ Generate Time Table</button>
+      </form>
+      <div id="savedTimetables"></div>
+
+    </div>
+
+    <button id="downloadPdfBtn">📄 Download PDF</button>
+
+    <div id="summary"></div>
+
+    <h3>Your Dynamic Time Table</h3>
+
+    <table id="timeTableData">
+    
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Subjects</th>
+          <th>Study Time</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+       
+    </table>
+    <div id="saveBtnContainer"></div>
+  </div>
+
+  <script src="script1.js"></script>
+</body>
+</html>

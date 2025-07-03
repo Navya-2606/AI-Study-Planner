@@ -1,0 +1,132 @@
+/* Import cute, modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 30px;
+}
+
+.container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    max-width: 850px;
+    width: 100%;
+    animation: fadeIn 0.7s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #6a5acd;
+}
+
+h2 {
+    font-size: 26px;
+    margin-top: 40px;
+    color: #6a5acd;
+}
+
+textarea {
+    width: 100%;
+    margin-top: 20px;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 15px;
+    background: #f8f9fb;
+    border: 2px solid #e0e0e0;
+    min-height: 200px;
+    outline: none;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #a186ff;
+    box-shadow: 0 0 8px rgba(161, 134, 255, 0.4);
+    background: #ffffff;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px;
+    font-size: 16px;
+    background: #f8f9fb;
+    border: 2px dashed #d3d3d3;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+input[type="file"]:hover {
+    border-color: #a186ff;
+    background: #ffffff;
+}
+
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 14px 30px;
+    font-size: 18px;
+    background-color: #a186ff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #7a5eff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(122, 94, 255, 0.3);
+}
+
+#resultArea {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f5f5fc;
+    border-radius: 15px;
+    border: 1px solid #e0e0f0;
+    min-height: 150px;
+    font-size: 16px;
+    line-height: 1.7;
+}
+#saveBtn {
+  padding: 12px 28px;
+  font-size: 17px;
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+#saveBtn:hover {
+  background-color: #5b4abb;
+  transform: translateY(-2px);
+}
